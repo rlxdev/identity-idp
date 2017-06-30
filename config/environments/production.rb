@@ -19,10 +19,10 @@ Rails.application.configure do
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_options = { from: Figaro.env.email_from }
   config.action_mailer.delivery_method = if Figaro.env.disable_email_sending == 'true'
-                                          :test
-                                        else
-                                          :mandrill
-                                        end
+                                           :test
+                                         else
+                                           :mandrill
+                                         end
 
   routes.default_url_options[:protocol] = :https
 
