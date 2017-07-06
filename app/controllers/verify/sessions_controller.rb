@@ -10,6 +10,7 @@ module Verify
     before_action :initialize_idv_session, only: [:create]
     before_action :submit_idv_form, only: [:create]
     before_action :submit_idv_job, only: [:create]
+    before_action :refresh_if_not_ready, only: [:show]
 
     delegate :attempts_exceeded?, to: :step, prefix: true
 
@@ -20,6 +21,10 @@ module Verify
     end
 
     def create
+      redirect_to verify_session_result_path
+    end
+
+    def show
       result = step.submit
       analytics.track_event(Analytics::IDV_BASIC_INFO_SUBMITTED_VENDOR, result.to_h)
 
@@ -63,7 +68,7 @@ module Verify
 
     def step
       @_step ||= Idv::ProfileStep.new(
-        idv_form_params: profile_params,
+        idv_form_params: idv_session.params,
         idv_session: idv_session,
         vendor_validator_result: vendor_validator_result
       )

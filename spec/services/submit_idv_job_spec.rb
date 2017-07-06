@@ -36,11 +36,11 @@ RSpec.describe SubmitIdvJob do
     it 'generates a UUID and enqueues a job, and saves the UUID in the session' do
       expect(SecureRandom).to receive(:uuid).and_return(result_id).once
 
-      expect(VendorValidatorJob).to receive(:perform_now).
+      expect(VendorValidatorJob).to receive(:perform_later).
         with(
           result_id: result_id,
           vendor_validator_class: vendor_validator_class,
-          vendor: :mock,
+          vendor: 'mock',
           vendor_params: vendor_params,
           vendor_session_id: vendor_session_id,
           applicant_json: applicant.to_json

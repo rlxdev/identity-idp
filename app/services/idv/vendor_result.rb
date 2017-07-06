@@ -14,8 +14,8 @@ module Idv
     def initialize(success: nil, errors: nil, reasons: nil, session_id: nil,
                    normalized_applicant: nil)
       @success = success
-      @errors = errors
-      @reasons = reasons
+      @errors = errors || {}
+      @reasons = reasons || []
       @session_id = session_id
       @normalized_applicant = normalized_applicant
     end

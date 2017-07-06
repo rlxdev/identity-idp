@@ -65,7 +65,7 @@ feature 'IdV session' do
       fill_in 'profile_first_name', with: first_name_to_trigger_exception
       click_idv_continue
 
-      expect(current_path).to eq verify_session_path
+      expect(current_path).to eq verify_session_result_path
       expect(page).to have_css('.modal-warning', text: t('idv.modal.sessions.heading'))
     end
 
@@ -152,7 +152,7 @@ feature 'IdV session' do
       click_idv_continue
 
       # failure reloads the form and shows warning modal
-      expect(current_path).to eq verify_session_path
+      expect(current_path).to eq verify_session_result_path
       expect(page).to have_css('.modal-warning', text: t('idv.modal.sessions.heading'))
       click_button t('idv.modal.button.warning')
 

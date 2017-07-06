@@ -120,6 +120,7 @@ en:
       hardfail: We can’t verify your identity right now.
       hardfail4: You can also go to %{sp} for more help in accessing services.
       help_center: Visit our Help Center to learn more about verifying your account.
+      loading: Verifying your identity
       mail_sent: Your letter is on its way
       personal_details_verified: Personal details verified!
       personal_key: This is your new personal key. Write it down and keep it in a

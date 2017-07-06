@@ -7,6 +7,7 @@ module Verify
     before_action :confirm_step_allowed
     before_action :submit_idv_form, only: [:create]
     before_action :submit_idv_job, only: [:create]
+    before_action :refresh_if_not_ready, only: [:show]
 
     def new
       @view_model = view_model
@@ -14,6 +15,10 @@ module Verify
     end
 
     def create
+      redirect_to verify_finance_result_path
+    end
+
+    def show
       result = step.submit
       analytics.track_event(Analytics::IDV_FINANCE_CONFIRMATION_VENDOR, result.to_h)
       increment_step_attempts
@@ -84,7 +89,7 @@ module Verify
     end
 
     def render_form
-      if step_params[:finance_type] == 'ccn'
+      if idv_form.idv_params[:finance_type] == 'ccn'
         render :new
       else
         render 'verify/finance_other/new'

@@ -44,4 +44,10 @@ module IdvSession
   def vendor_validator_result
     VendorValidatorResultStorage.new.load(idv_session.async_result_id)
   end
+
+  def refresh_if_not_ready
+    return if vendor_validator_result.present?
+
+    render 'shared/refresh'
+  end
 end
