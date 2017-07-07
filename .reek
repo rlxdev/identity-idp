@@ -42,6 +42,7 @@ NilCheck:
 LongParameterList:
   exclude:
     - IdentityLinker#optional_attributes
+    - VendorValidatorJob#perform
 RepeatedConditional:
   exclude:
     - Users::ResetPasswordsController
@@ -74,6 +75,7 @@ TooManyMethods:
     - OpenidConnect::AuthorizationController
     - Idv::Session
     - User
+    - Verify::SessionsController
 UncommunicativeMethodName:
   exclude:
     - PhoneConfirmationFlow
@@ -100,6 +102,7 @@ UtilityFunction:
     - SessionDecorator
     - WorkerHealthChecker::Middleware#call
     - UserEncryptedAttributeOverrides#create_fingerprint
+    - LocaleHelper#locale_url_param
 'app/controllers':
   InstanceVariableAssumption:
     enabled: false
