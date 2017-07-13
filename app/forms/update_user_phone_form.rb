@@ -29,9 +29,7 @@ class UpdateUserPhoneForm
   attr_reader :phone_changed
 
   def check_phone_change(params)
-    formatted_phone = params[:phone].phony_formatted(
-      format: :international, normalize: :US, spaces: ' '
-    )
+    formatted_phone = PhoneFormatter.new.format(params[:phone])
 
     return unless formatted_phone != @user.phone
 

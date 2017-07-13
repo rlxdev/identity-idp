@@ -9,9 +9,7 @@ class TwoFactorSetupForm
   end
 
   def submit(params)
-    self.phone = params[:phone].phony_formatted(
-      format: :international, normalize: :US, spaces: ' '
-    )
+    self.phone = PhoneFormatter.new.format(params[:phone])
     self.otp_delivery_preference = params[:otp_delivery_preference]
 
     @success = valid?

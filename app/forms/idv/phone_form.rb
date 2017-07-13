@@ -14,9 +14,7 @@ module Idv
     def submit(params)
       submitted_phone = params[:phone]
 
-      formatted_phone = submitted_phone.phony_formatted(
-        format: :international, normalize: :US, spaces: ' '
-      )
+      formatted_phone = PhoneFormatter.new.format(submitted_phone)
 
       self.phone = formatted_phone
 
