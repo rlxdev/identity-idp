@@ -3,7 +3,6 @@ module FormPhoneValidator
 
   included do
     validates_plausible_phone :phone,
-                              country_code: 'US',
                               presence: true,
                               message: :improbable_phone
   end

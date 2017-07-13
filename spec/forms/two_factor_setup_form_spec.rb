@@ -12,12 +12,12 @@ describe TwoFactorSetupForm, type: :model do
   end
 
   describe 'phone validation' do
-    it 'uses the phony_rails gem with country option set to US' do
+    it 'uses the phony_rails gem' do
       phone_validator = subject._validators.values.flatten.
                         detect { |v| v.class == PhonyPlausibleValidator }
 
       expect(phone_validator.options).
-        to eq(country_code: 'US', presence: true, message: :improbable_phone)
+        to eq(presence: true, message: :improbable_phone)
     end
   end
 
