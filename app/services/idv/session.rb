@@ -70,8 +70,12 @@ module Idv
       user_session.delete(:idv)
     end
 
+    def phone_confirmation_complete?
+      phone_confirmation == true && params['phone_confirmed_at'].present?
+    end
+
     def complete_session
-      complete_profile if phone_confirmation == true
+      complete_profile if phone_confirmation_complete?
       create_usps_entry if address_verification_mechanism == 'usps'
     end
 

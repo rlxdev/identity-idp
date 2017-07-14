@@ -33,4 +33,37 @@ describe Idv::Session do
       end
     end
   end
+
+  describe '#complete_session' do
+    context 'with phone verifed by vendor' do
+      before do
+        subject.address_verification_mechanism = :phone
+        subject.phone_confirmation = true
+      end
+
+      context 'having completed OTP phone confirmation' do
+        before do
+          subject.params['phone_confirmed_at'] = Time.zone.now
+        end
+
+        it 'completes the user profile' do
+          allow(subject).to receive(:complete_profile)
+          subject.complete_session
+          expect(subject).to have_received(:complete_profile)
+        end
+      end
+
+      context 'not having completed OTP phone confirmation' do
+        before do
+          subject.params.delete('phone_confirmed_at')
+        end
+
+        it 'does not complete the user profile' do
+          allow(subject).to receive(:complete_profile)
+          subject.complete_session
+          expect(subject).not_to have_received(:complete_profile)
+        end
+      end
+    end
+  end
 end
