@@ -433,6 +433,7 @@ feature 'IdV session' do
       click_acknowledge_personal_key
 
       user.reload
+
       expect(user.active_profile).to be_nil
     end
   end

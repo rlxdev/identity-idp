@@ -45,12 +45,14 @@ describe Idv::Session do
       it 'completes the profile if the user has completed OTP phone confirmation' do
         subject.user_phone_confirmation = true
         subject.complete_session
+
         expect(subject).to have_received(:complete_profile)
       end
 
       it 'does not complete the profile if the user has not completed OTP phone confirmation' do
         subject.user_phone_confirmation = nil
         subject.complete_session
+
         expect(subject).not_to have_received(:complete_profile)
       end
     end
@@ -60,24 +62,28 @@ describe Idv::Session do
     it 'returns true if the user and vendor have confirmed the phone' do
       subject.user_phone_confirmation = true
       subject.vendor_phone_confirmation = true
+
       expect(subject.phone_confirmed?).to eq(true)
     end
 
     it 'returns false if the user has not confirmed the phone' do
       subject.user_phone_confirmation = nil
       subject.vendor_phone_confirmation = true
+
       expect(subject.phone_confirmed?).to eq(false)
     end
 
     it 'returns false if the vendor has not confirmed the phone' do
       subject.user_phone_confirmation = true
       subject.vendor_phone_confirmation = nil
+
       expect(subject.phone_confirmed?).to eq(false)
     end
 
     it 'returns false if neither the user nor the vendor has confirmed the phone' do
       subject.user_phone_confirmation = nil
       subject.vendor_phone_confirmation = nil
+
       expect(subject.phone_confirmed?).to eq(false)
     end
   end
@@ -90,22 +96,26 @@ describe Idv::Session do
 
       it 'returns true if the vendor has confirmed the phone number' do
         subject.vendor_phone_confirmation = true
+
         expect(subject.address_mechanism_chosen?).to eq(true)
       end
 
       it 'returns false if the vendor has not confirmed the phone number' do
         subject.vendor_phone_confirmation = nil
+
         expect(subject.address_mechanism_chosen?).to eq(false)
       end
     end
 
     it 'returns true if the user has selected usps address verification' do
       subject.address_verification_mechanism = 'usps'
+
       expect(subject.address_mechanism_chosen?).to eq(true)
     end
 
     it 'returns false if the user has not selected phone or usps address verification' do
       subject.address_verification_mechanism = nil
+
       expect(subject.address_mechanism_chosen?).to eq(false)
     end
   end

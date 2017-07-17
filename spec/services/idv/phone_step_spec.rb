@@ -66,8 +66,8 @@ describe Idv::PhoneStep do
           errors: {}
         )
       )
-
       step.submit
+
       expect(idv_session.user_phone_confirmation).to eq(true)
     end
 
@@ -78,8 +78,8 @@ describe Idv::PhoneStep do
           errors: {}
         )
       )
-
       step.submit
+
       expect(idv_session.user_phone_confirmation).to eq(false)
     end
   end
