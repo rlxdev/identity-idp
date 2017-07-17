@@ -66,6 +66,7 @@ describe Verify::ConfirmationsController do
 
     context 'user used 2FA phone as phone of record' do
       before do
+        subject.idv_session.params['phone'] = user.phone
         subject.idv_session.params['phone_confirmed_at'] = Time.zone.now
         subject.idv_session.phone_confirmation = true
       end
@@ -149,6 +150,7 @@ describe Verify::ConfirmationsController do
     context 'user confirmed a new phone' do
       it 'tracks that event' do
         stub_analytics
+        subject.idv_session.params['phone'] = '+1 (202) 555-9876'
         subject.idv_session.params['phone_confirmed_at'] = Time.zone.now
 
         result = {
