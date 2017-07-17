@@ -12,7 +12,7 @@ RSpec.describe UspsUploader do
       sftp_options = [
         Figaro.env.equifax_sftp_host,
         Figaro.env.equifax_sftp_username,
-        { key_data: [RequestKeyManager.equifax_ssh_key.to_pem] }
+        { key_data: [RequestKeyManager.equifax_ssh_key.to_pem] },
       ]
       expect(Net::SFTP).to receive(:start).
         with(*sftp_options).and_yield(sftp_connection)
@@ -37,4 +37,3 @@ RSpec.describe UspsUploader do
     end
   end
 end
-
