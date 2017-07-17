@@ -5,8 +5,6 @@ module Verify
 
     before_action :confirm_step_needed
     before_action :confirm_step_allowed
-    before_action :submit_idv_form, only: [:create]
-    before_action :submit_idv_job, only: [:create]
     before_action :refresh_if_not_ready, only: [:show]
 
     def new
@@ -15,7 +13,16 @@ module Verify
     end
 
     def create
-      redirect_to verify_finance_result_path
+      result = idv_form.submit(step_params)
+      analytics.track_event(Analytics::IDV_FINANCE_CONFIRMATION_FORM, result.to_h)
+
+      if result.success?
+        submit_idv_job
+        redirect_to verify_finance_result_path
+      else
+        @view_model = view_model
+        render_form
+      end
     end
 
     def show
