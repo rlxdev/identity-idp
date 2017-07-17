@@ -68,7 +68,8 @@ describe Verify::ConfirmationsController do
       before do
         subject.idv_session.params['phone'] = user.phone
         subject.idv_session.params['phone_confirmed_at'] = Time.zone.now
-        subject.idv_session.phone_confirmation = true
+        subject.idv_session.vendor_phone_confirmation = true
+        subject.idv_session.user_phone_confirmation = true
       end
 
       it 'activates profile' do
