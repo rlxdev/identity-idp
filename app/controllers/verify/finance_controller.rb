@@ -40,16 +40,6 @@ module Verify
 
     private
 
-    def submit_idv_form
-      result = idv_form.submit(step_params)
-      analytics.track_event(Analytics::IDV_FINANCE_CONFIRMATION_FORM, result.to_h)
-
-      return if result.success?
-
-      @view_model = view_model
-      render_form
-    end
-
     def submit_idv_job
       SubmitIdvJob.new(
         vendor_validator_class: Idv::FinancialsValidator,

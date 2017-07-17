@@ -37,6 +37,7 @@ module Idv
 
     def initialize(idv_params)
       @idv_params = idv_params
+      @params = nil
       finance_type = FINANCE_TYPES.find { |param| idv_params.key? param }
       update_finance_values(idv_params.merge(finance_type: finance_type))
     end
