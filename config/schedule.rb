@@ -15,3 +15,9 @@ every health_check, roles: [:job_creator] do
   runner 'WorkerHealthChecker.check'
   runner 'WorkerHealthChecker.enqueue_dummy_jobs'
 end
+
+mail_batch = Whenever.seconds(Figaro.env.usps_mail_batch_hours.to_i, :hours)
+
+every mail_batch, roles: [:job_creator] do
+  runner 'UspsUploader.run'
+end

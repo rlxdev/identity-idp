@@ -360,6 +360,8 @@ GEM
     nenv (0.3.0)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
+    net-sftp (2.1.2)
+      net-ssh (>= 2.6.5)
     net-ssh (4.1.0)
     newrelic_rpm (4.2.0.334)
     nokogiri (1.8.0)
@@ -697,6 +699,7 @@ DEPENDENCIES
   json-jwt
   lograge
   mailcatcher
+  net-sftp
   newrelic_rpm
   overcommit
   pg
